@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+    <head>
+        <title>BusTime</title>
+        <link rel="stylesheet" href="themes/css/apple.css" title="jQTouch">
+        <style type="text/css" media="screen">
+            .edgetoedge li a .preview, .edgetoedge li a .subject {
+                display: block;
+                color: #999;
+                font-size: 12px;
+                font-weight: normal;
+            }
+            .edgetoedge li a .subject {
+                color: #000;
+                font-size: 14px;
+            }
+			#jqt .toolbar.l > h1 {
+			  width: 170px;
+			}
+            #jqt .toolbar.xl > h1 {
+              width: 170px;
+              font-size: 17px;
+              padding-bottom: 1px;
+            }
+            #jqt .toolbar.xxl > h1 {
+              width: 170px;
+              font-size: 15px;
+              padding-bottom: 3px;
+            }
+
+			#jqt .time {
+				width: 58px;
+				position: relative;
+				height: 27px;
+				display: block;
+				overflow: hidden;
+				float: right;
+			}
+        </style>
+        <script src="src/lib/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="src/jqtouch.min.js" type="text/javascript" charset="utf-8"></script>
+    	<script src="extensions/jqt.autotitles.min.js" type="application/x-javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            var jqtouch = $.jQTouch({
+                icon: 'mail.png',
+                preloadImages: []
+            });
+            // Add an onload function
+            $(function(){
+
+                // Dynamically set next page titles after clicking certain links
+                $('#home ul a, #routescreen ul a').click(function(){
+                    $( $(this).attr('href') + ' h1' ).html($(this).html());
+                });
+
+                $('#btgarrfind').tap(function(){
+                    console.log("hi");
+                    $('#arrivallist').empty();
+                    for (var i = 0; i < btgBeith.length; i++){
+                        $('#arrivallist').append('<li>'+btgBeith.getTimeStr(i)+'<small class="counter">'+btgBeith.getBus(i)+'</small></li>');
+                    }
+                    // document.getElementById('departtime').value
+                });
+
+            });
+
+            btgBeith = new Destination();
+            btgBeith.addTime(6, 15, "X36");
+            btgBeith.addTime(6, 44, "X36");
+            btgBeith.addTime(6, 56, "X34");
+            btgBeith.addTime(7, 18, "X36");
+            btgBeith.addTime(7, 33, "X34");
+            btgBeith.addTime(7, 48, "X35");
+            btgBeith.addTime(7, 58, "X36");
+            btgBeith.addTime(8, 43, "X34");
+            btgBeith.addTime(9, 13, "X36");
+            btgBeith.addTime(9, 43, "X34");
+            btgBeith.addTime(10, 13, "X36");
+            btgBeith.addTime(10, 43, "X34");
+            btgBeith.addTime(11, 13, "X36");
+            btgBeith.addTime(11, 43, "X34");
+            btgBeith.addTime(12, 13, "X36");
+            btgBeith.addTime(12, 43, "X34");
+            btgBeith.addTime(13, 13, "X36");
+            btgBeith.addTime(13, 43, "X34");
+            btgBeith.addTime(14, 13, "X36");
+            btgBeith.addTime(14, 43, "X34");
+            btgBeith.addTime(15, 13, "X36");
+            btgBeith.addTime(15, 43, "X34");
+            btgBeith.addTime(16, 13, "X36");
+            btgBeith.addTime(16, 43, "X34");
+            btgBeith.addTime(17, 13, "X36");
+            btgBeith.addTime(17, 58, "X34");
+            btgBeith.addTime(18, 50, "X36");
+            btgBeith.addTime(20, 13, "X36");
+
+            function Destination(){
+                this.timeList = new Array();
+                this.length = 0;
+                this.addTime = function(hh, mm, bus) {
+                    this.timeList.push([hh, mm, bus]);
+                    this.length = this.timeList.length;
+                }
+                this.getTimeStr = function (i){
+                    var time = this.timeList[i];
+                    return zeroFill(time[0], 2) + ":" + zeroFill(time[1], 2);
+                }
+                this.getBus = function (i){
+                   var time = this.timeList[i];
+                   return time[2];
+                }
+            }
+
+            function zeroFill( number, width ) {
+                width -= number.toString().length;
+                if (width > 0) {
+                    return new Array(width + (/\./.test(number) ? 2 : 1)).join('0') + number;
+                }
+                return number;
+            }
+
+/*          // Page animation callback events
+            $('#pageevents').bind('pageAnimationStart', function(e, info){ 
+	                if (data.direction === "out"){ 
+					      if($("#sw-wrapper").css("top") != undefined){ 
+					        SpinningWheel.close(); 
+					      } 
+					    }
+                })
+  })*/
+        </script>
+    </head>
+    <body>
+        <div id="jqt">
+            <div id="home">
+                <div class="toolbar">
+                    <h1>BusTime</h1>
+                </div>
+                <div class="scroll">
+                	<h2>Route</h2>
+	                <ul class="rounded">
+	                    <li><a href="#btg">Beith to Glasgow</a></li>
+	                    <li><a href="#gtb">Glasgow to Beith</a></li>
+	                    <li><a href="#routescreen">Other</a></li>
+	                </ul>
+            	</div>
+            </div>
+            <div id="btg" class="edgetoedge">
+                <div class="toolbar l">
+                    <a href="#" class="back button">Route</a>
+                    <h1></h1>
+                    <!-- <a class="add slideup" id="newMessageLink" href="#new" name="newMessageLink">+</a> -->
+                </div>
+                <div class="scroll">
+                    <ul class="rounded">
+                        <li>Arrive by<span class="time"><input type="time" name="arrivetime" id="arrivetime"/></span></li>
+                        <li class="arrow"><a href="#btgarrive" id="btgarrfind">Find Times</a></li>
+                    </ul>
+                    <ul class="rounded">
+                        <li>Depart at<span class="time"><input type="time" name="departtime" id="departtime"/></span></li>
+                        <li class="arrow"><a href="#btgdepart">Find Times</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="btgarrive" class="edgetoedge">
+                <div class="toolbar xl">
+                    <a href="#" class="back button">Beith to...</a>
+                    <h1>Departure Times</h1>
+                </div>
+                <form class="scroll">
+                    <h2>Leaving Beith at</h2>
+                    <ul id="arrivallist" class="rounded">
+                        <li>Loading...</li>
+                    </ul>
+                </form>
+            </div>
+            <div id="gtb" class="edgetoedge">
+            </div>
+         </div>
+    </body>
+</html>
