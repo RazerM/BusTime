@@ -151,7 +151,8 @@
                 }
             }
 
-            function Destination(){
+            function Destination(destName){
+                this.destName = destName;
                 this.timeList = new Array();
                 this.length = 0;
                 this.addTime = function(hh, mm, bus) {
