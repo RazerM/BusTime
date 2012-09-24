@@ -55,10 +55,11 @@
 
                 $('#btgarrfind').tap(function(){
                     $('#arrivallist').empty();
-                    for (var i = 0; i < btgBeith.length; i++){
-                        $('#arrivallist').append('<li>'+btgBeith.getTimeStr(i)+'<small class="counter">'+btgBeith.getBus(i)+'</small></li>');
+                    var arriveTime = $('#arrivetime').val().split(":");
+                    var end = btg.getTimeBefore(btgGlasgow, arriveTime[0], arriveTime[1]);
+                    for (var i = 0; i <= end+1; i++){
+                        $('#arrivallist').append('<li>' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="counter">' + btg.getBus(btgGlasgow, i) + '</small></li>');
                     }
-                    // document.getElementById('departtime').value
                 });
 
                 $('#btgArriveShowAll').tap(function(){
@@ -187,10 +188,6 @@
                 }
             }
 
-            function inputToHHMM(input){
-                
-            }
-
             function zeroFill( number, width ) {
                 width -= number.toString().length;
                 if (width > 0) {
@@ -198,16 +195,6 @@
                 }
                 return number;
             }
-
-/*          // Page animation callback events
-            $('#pageevents').bind('pageAnimationStart', function(e, info){ 
-	                if (data.direction === "out"){ 
-					      if($("#sw-wrapper").css("top") != undefined){ 
-					        SpinningWheel.close(); 
-					      } 
-					    }
-                })
-  })*/
         </script>
     </head>
     <body>
