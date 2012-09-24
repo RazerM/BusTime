@@ -61,6 +61,13 @@
                     // document.getElementById('departtime').value
                 });
 
+                $('#btgArriveShowAll').tap(function(){
+                    $('#arrivallist').empty();
+                    for (var i = 0; i < btg.destLength; i++){
+                        $('#arrivallist').append('<li>' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="counter">' + btg.getBus(btgGlasgow, i) + '</small></li>');
+                    }
+                });
+
             });
 
             btg = new Route();
@@ -241,10 +248,11 @@
                     <h1>Departure Times</h1>
                 </div>
                 <form class="scroll">
-                    <h2>Leaving Beith at</h2>
+                    <!-- <h2>Leaving Beith at</h2> -->
                     <ul id="arrivallist" class="rounded">
                         <li>Loading...</li>
                     </ul>
+                    <div style="margin-bottom: 10px;" class="scroll"><a href="#" class="whiteButton" id="btgArriveShowAll">Show All</a></div>
                 </form>
             </div>
             <div id="gtb" class="edgetoedge">
