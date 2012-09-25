@@ -36,6 +36,27 @@
 				overflow: hidden;
 				float: right;
 			}
+
+            #jqt ul li.ideal {
+                color: #439D39;
+            }
+
+            #jqt ul li.late {
+                color: #BA2925;
+            }
+
+            #jqt ul li small.stagecoach {
+              background: #006bb6;
+              color: #f9a03d;
+              text-shadow: none;
+              z-index: 10;
+              font-size: 16px;
+              font-weight: bold;
+              -webkit-border-radius: 3px;
+              border-radius: 3px;
+              display: block;
+              width: auto;
+            }
         </style>
         <script src="src/lib/zepto.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="src/jqtouch.min.js" type="text/javascript" charset="utf-8"></script>
@@ -56,16 +77,28 @@
                 $('#btgarrfind').tap(function(){
                     $('#arrivallist').empty();
                     var arriveTime = $('#arrivetime').val().split(":");
-                    var end = btg.getTimeBefore(btgGlasgow, arriveTime[0], arriveTime[1]);
-                    for (var i = 0; i <= end+1; i++){
-                        $('#arrivallist').append('<li>' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="counter">' + btg.getBus(btgGlasgow, i) + '</small></li>');
+                    var ideal = btg.getTimeBefore(btgGlasgow, arriveTime[0], arriveTime[1]);
+                    var start = ideal - 2;
+                    var end = ideal+1; //Add one timeslot past the desired arrival time
+                    var late = ideal+1;
+                    if (end >= btg.destLength) {end = btg.destLength-1;}
+                    if (start < 0) {start = 0;}
+                    for (var i = start; i <= end; i++) {
+                        if (i == ideal-1){ //ideal-1 to allow travel time!!
+                            $('#arrivallist').append('<li class="ideal">' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="stagecoach">' + btg.getBus(btgGlasgow, i) + '</small></li>');
+                        } else if (i >= late) {
+                            $('#arrivallist').append('<li class="late">' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="stagecoach">' + btg.getBus(btgGlasgow, i) + '</small></li>');
+                        } else {
+                            $('#arrivallist').append('<li>' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="stagecoach">' + btg.getBus(btgGlasgow, i) + '</small></li>');
+                        }
+
                     }
                 });
 
                 $('#btgArriveShowAll').tap(function(){
                     $('#arrivallist').empty();
                     for (var i = 0; i < btg.destLength; i++){
-                        $('#arrivallist').append('<li>' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="counter">' + btg.getBus(btgGlasgow, i) + '</small></li>');
+                        $('#arrivallist').append('<li>' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="stagecoach">' + btg.getBus(btgGlasgow, i) + '</small></li>');
                     }
                 });
 
