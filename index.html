@@ -95,6 +95,12 @@
                     }
                 });
 
+                $('#btgdepfind').tap(function(){
+                    $('departlist').empty();
+                    var departTime = $('#departtime').val().split(":");
+                    var ideal = btg.getTimeAfter(btgBeith, departTime[0], departTime[1]);
+                });
+
                 $('#btgArriveShowAll').tap(function(){
                     $('#arrivallist').empty();
                     for (var i = 0; i < btg.destLength; i++){
@@ -184,6 +190,10 @@
                     var dest = this.destList[iDest];
                     return dest.lastTimeBefore(Number(hh), Number(mm));
                 }
+                this.getTimeAfter = function(iDest, hh, mm){
+                    var dest = this.destList[iDest];
+                    return dest.firstTimeAfter(Number(hh), Number(mm));
+                }
                 this.getTimeStr = function(dest, i){
                     return this.destList[dest].getTimeStr(i);
                 }
@@ -218,6 +228,14 @@
                         }
                     }
                     return this.length-1;
+                }
+                this.firstTimeAfter = function(hh, mm){
+                    for (var i = 0; i < this.length; i++){
+                        if ((this.timeList[i][0] == hh && this.timeList[i][1] >= mm) || this.timeList[i][1] >= hh){
+                            return i;
+                        }
+                    }
+                    return 0;
                 }
             }
 
@@ -273,6 +291,19 @@
                         <li>Loading...</li>
                     </ul>
                     <div style="margin-bottom: 10px;" class="scroll"><a href="#" class="whiteButton" id="btgArriveShowAll">Show All</a></div>
+                </form>
+            </div>
+            <div id="btgdepart" class="edgetoedge">
+                <div class="toolbar xl">
+                    <a href="#" class="back button">Beith to...</a>
+                    <h1>Departure Times</h1>
+                </div>
+                <form class="scroll">
+                    <!-- <h2>Leaving Beith at</h2> -->
+                    <ul id="departlist" class="rounded">
+                        <li>Loading...</li>
+                    </ul>
+                    <div style="margin-bottom: 10px;" class="scroll"><a href="#" class="whiteButton" id="btgDepartShowAll">Show All</a></div>
                 </form>
             </div>
             <div id="gtb" class="edgetoedge">
