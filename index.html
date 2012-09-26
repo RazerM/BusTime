@@ -95,6 +95,27 @@
                     }
                 });
 
+                $('#gtbarrfind').tap(function(){
+                    $('#garrivallist').empty();
+                    var arriveTime = $('#garrivetime').val().split(":");
+                    var ideal = gtb.getTimeBefore(gtbBeith, arriveTime[0], arriveTime[1]);
+                    var start = ideal - 2;
+                    var end = ideal+1; //Add one timeslot past the desired arrival time
+                    var late = ideal+1;
+                    if (end >= gtb.destLength) {end = gtb.destLength-1;}
+                    if (start < 0) {start = 0;}
+                    for (var i = start; i <= end; i++) {
+                        if (i == ideal-1){ //ideal-1 to allow travel time!!
+                            $('#garrivallist').append('<li class="ideal">' + gtb.getTimeStr(gtbGlasgow, i) + ' \u2192' + gtb.getTimeStr(gtbBeith, i) + '<small class="stagecoach">' + gtb.getBus(gtbBeith, i) + '</small></li>');
+                        } else if (i >= late) {
+                            $('#garrivallist').append('<li class="late">' + gtb.getTimeStr(gtbGlasgow, i) + ' \u2192' + gtb.getTimeStr(gtbBeith, i) + '<small class="stagecoach">' + gtb.getBus(gtbBeith, i) + '</small></li>');
+                        } else {
+                            $('#garrivallist').append('<li>' + gtb.getTimeStr(gtbGlasgow, i) + ' \u2192' + gtb.getTimeStr(gtbBeith, i) + '<small class="stagecoach">' + gtb.getBus(gtbBeith, i) + '</small></li>');
+                        }
+
+                    }
+                });
+
                 $('#btgdepfind').tap(function(){
                     $('#departlist').empty();
                     var departTime = $('#departtime').val().split(":");
@@ -109,6 +130,24 @@
                             $('#departlist').append('<li class="ideal">' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="stagecoach">' + btg.getBus(btgGlasgow, i) + '</small></li>');
                         } else {
                             $('#departlist').append('<li>' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="stagecoach">' + btg.getBus(btgGlasgow, i) + '</small></li>');
+                        }
+                    }
+                });
+
+                $('#gtbdepfind').tap(function(){
+                    $('#gdepartlist').empty();
+                    var departTime = $('#gdeparttime').val().split(":");
+                    var ideal = gtb.getTimeAfter(gtbGlasgow, departTime[0], departTime[1]);
+                    console.log(departTime);
+                    var start = ideal-1;
+                    var end = ideal + 2;
+                    if (end >= gtb.destLength) {end = gtb.destLength-1;}
+                    if (start < 0) {start = 0;}
+                    for (var i = start; i <= end; i++) {
+                        if (i == ideal){
+                            $('#gdepartlist').append('<li class="ideal">' + gtb.getTimeStr(gtbGlasgow, i) + ' \u2192' + gtb.getTimeStr(gtbBeith, i) + '<small class="stagecoach">' + gtb.getBus(gtbBeith, i) + '</small></li>');
+                        } else {
+                            $('#gdepartlist').append('<li>' + gtb.getTimeStr(gtbGlasgow, i) + ' \u2192' + gtb.getTimeStr(gtbBeith, i) + '<small class="stagecoach">' + gtb.getBus(gtbBeith, i) + '</small></li>');
                         }
                     }
                 });
@@ -392,6 +431,30 @@
                         <li class="arrow"><a href="#gtbdepart" id="gtbdepfind">Find Times</a></li>
                     </ul>
                 </div>
+            </div>
+            <div id="gtbarrive" class="edgetoedge">
+                <div class="toolbar xl">
+                    <a href="#" class="back button">Glasgow...</a>
+                    <h1>Departure Times</h1>
+                </div>
+                <form class="scroll">
+                    <ul id="garrivallist" class="rounded">
+                        <li>Loading...</li>
+                    </ul>
+                    <div style="margin-bottom: 10px;" class="scroll"><a href="#" class="whiteButton" id="gtbArriveShowAll">Show All</a></div>
+                </form>
+            </div>
+            <div id="gtbdepart" class="edgetoedge">
+                <div class="toolbar xl">
+                    <a href="#" class="back button">Glasgow...</a>
+                    <h1>Departure Times</h1>
+                </div>
+                <form class="scroll">
+                    <ul id="gdepartlist" class="rounded">
+                        <li>Loading...</li>
+                    </ul>
+                    <div style="margin-bottom: 10px;" class="scroll"><a href="#" class="whiteButton" id="gtbDepartShowAll">Show All</a></div>
+                </form>
             </div>
          </div>
     </body>
