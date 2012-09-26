@@ -96,9 +96,21 @@
                 });
 
                 $('#btgdepfind').tap(function(){
-                    $('departlist').empty();
+                    $('#departlist').empty();
                     var departTime = $('#departtime').val().split(":");
                     var ideal = btg.getTimeAfter(btgBeith, departTime[0], departTime[1]);
+                    console.log(departTime);
+                    var start = ideal-1;
+                    var end = ideal + 2;
+                    if (end >= btg.destLength) {end = btg.destLength-1;}
+                    if (start < 0) {start = 0;}
+                    for (var i = start; i <= end; i++) {
+                        if (i == ideal){
+                            $('#departlist').append('<li class="ideal">' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="stagecoach">' + btg.getBus(btgGlasgow, i) + '</small></li>');
+                        } else {
+                            $('#departlist').append('<li>' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="stagecoach">' + btg.getBus(btgGlasgow, i) + '</small></li>');
+                        }
+                    }
                 });
 
                 $('#btgArriveShowAll').tap(function(){
