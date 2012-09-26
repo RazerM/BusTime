@@ -302,7 +302,8 @@
                 }
                 this.firstTimeAfter = function(hh, mm){
                     for (var i = 0; i < this.length; i++){
-                        if ((this.timeList[i][0] == hh && this.timeList[i][1] >= mm) || this.timeList[i][1] >= hh){
+                        console.log("MM: " + this.timeList[i][1] + " >= " + mm);
+                        if ((this.timeList[i][0] == hh && this.timeList[i][1] >= mm) || this.timeList[i][0] > hh){
                             return i;
                         }
                     }
