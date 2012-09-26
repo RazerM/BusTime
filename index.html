@@ -159,6 +159,26 @@
                     }
                 });
 
+                $('#btgDepartShowAll').tap(function(){
+                    $('#departlist').empty();
+                    for (var i = 0; i < btg.destLength; i++){
+                        $('#departlist').append('<li>' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="stagecoach">' + btg.getBus(btgGlasgow, i) + '</small></li>');
+                    }
+                });
+
+                $('#gtbArriveShowAll').tap(function(){
+                    $('#garrivallist').empty();
+                    for (var i = 0; i < gtb.destLength; i++){
+                        $('#garrivallist').append('<li>' + gtb.getTimeStr(gtbGlasgow, i) + ' \u2192' + gtb.getTimeStr(gtbBeith, i) + '<small class="stagecoach">' + gtb.getBus(gtbBeith, i) + '</small></li>');
+                    }
+                });
+
+                $('#gtbDepartShowAll').tap(function(){
+                    $('#gdepartlist').empty();
+                    for (var i = 0; i < gtb.destLength; i++){
+                        $('#gdepartlist').append('<li>' + gtb.getTimeStr(gtbGlasgow, i) + ' \u2192' + gtb.getTimeStr(gtbBeith, i) + '<small class="stagecoach">' + gtb.getBus(gtbBeith, i) + '</small></li>');
+                    }
+                });
             });
 
             btg = new Route();
