@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
+<html manifest="cache.manifest">
     <head>
         <title>BusTime 2.0</title>
         <link rel="stylesheet" href="themes/css/apple.css" title="jQTouch">
@@ -61,9 +61,10 @@
         <script src="src/lib/zepto.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="src/jqtouch.min.js" type="text/javascript" charset="utf-8"></script>
     	<script src="extensions/jqt.autotitles.min.js" type="application/x-javascript" charset="utf-8"></script>
+        <script src="extensions/jqt.offline.min.js" type="application/x-javascript" charset="utf-8"></script>
         <script type="text/javascript" charset="utf-8">
             var jqtouch = $.jQTouch({
-                icon: 'mail.png',
+                icon: 'BusTimeBlue.png',
                 preloadImages: []
             });
             // Add an onload function
@@ -380,7 +381,6 @@
         </script>
     </head>
     <body>
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="BusTimeBlue.png" />
         <div id="jqt">
             <div id="home">
                 <div class="toolbar">
