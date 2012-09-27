@@ -16,3 +16,4 @@ cp src/lib/*.min.js out/src/lib/
 cp BusTimeBlue.png out/
 cp index.html out/
 cp cache.manifest out/
+cp .htaccess out/
