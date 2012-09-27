@@ -1,13 +1,10 @@
 CACHE MANIFEST
-# Rev 1
+# Rev 3
 
 BusTimeBlue.png
 index.html
 
 extensions/jqt.autotitles.min.js
-extensions/jqt.floaty.min.js
-extensions/jqt.location.min.js
-extensions/jqt.offline.min.js
 extensions/jqt.themeswitcher.min.js
 
 src/jqtouch-jquery.min.js
