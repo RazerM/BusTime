@@ -91,8 +91,8 @@
                         } else {
                             $('#arrivallist').append('<li>' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="stagecoach">' + btg.getBus(btgGlasgow, i) + '</small></li>');
                         }
-
                     }
+                    $('#btgArriveShowAll').show();
                 });
 
                 $('#gtbarrfind').tap(function(){
@@ -112,8 +112,8 @@
                         } else {
                             $('#garrivallist').append('<li>' + gtb.getTimeStr(gtbGlasgow, i) + ' \u2192' + gtb.getTimeStr(gtbBeith, i) + '<small class="stagecoach">' + gtb.getBus(gtbBeith, i) + '</small></li>');
                         }
-
                     }
+                    $('#gtbArriveShowAll').show();
                 });
 
                 $('#btgdepfind').tap(function(){
@@ -132,6 +132,7 @@
                             $('#departlist').append('<li>' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="stagecoach">' + btg.getBus(btgGlasgow, i) + '</small></li>');
                         }
                     }
+                    $('#btgDepartShowAll').show();
                 });
 
                 $('#gtbdepfind').tap(function(){
@@ -150,6 +151,7 @@
                             $('#gdepartlist').append('<li>' + gtb.getTimeStr(gtbGlasgow, i) + ' \u2192' + gtb.getTimeStr(gtbBeith, i) + '<small class="stagecoach">' + gtb.getBus(gtbBeith, i) + '</small></li>');
                         }
                     }
+                    $('#gtbDepartShowAll').show();
                 });
 
                 $('#btgArriveShowAll').tap(function(){
@@ -157,6 +159,7 @@
                     for (var i = 0; i < btg.destLength; i++){
                         $('#arrivallist').append('<li>' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="stagecoach">' + btg.getBus(btgGlasgow, i) + '</small></li>');
                     }
+                    $('#btgArriveShowAll').hide();
                 });
 
                 $('#btgDepartShowAll').tap(function(){
@@ -164,6 +167,7 @@
                     for (var i = 0; i < btg.destLength; i++){
                         $('#departlist').append('<li>' + btg.getTimeStr(btgBeith, i) + ' \u2192' + btg.getTimeStr(btgGlasgow, i) + '<small class="stagecoach">' + btg.getBus(btgGlasgow, i) + '</small></li>');
                     }
+                    $('#btgDepartShowAll').hide();
                 });
 
                 $('#gtbArriveShowAll').tap(function(){
@@ -171,6 +175,7 @@
                     for (var i = 0; i < gtb.destLength; i++){
                         $('#garrivallist').append('<li>' + gtb.getTimeStr(gtbGlasgow, i) + ' \u2192' + gtb.getTimeStr(gtbBeith, i) + '<small class="stagecoach">' + gtb.getBus(gtbBeith, i) + '</small></li>');
                     }
+                    $('#gtbArriveShowAll').hide();
                 });
 
                 $('#gtbDepartShowAll').tap(function(){
@@ -178,6 +183,7 @@
                     for (var i = 0; i < gtb.destLength; i++){
                         $('#gdepartlist').append('<li>' + gtb.getTimeStr(gtbGlasgow, i) + ' \u2192' + gtb.getTimeStr(gtbBeith, i) + '<small class="stagecoach">' + gtb.getBus(gtbBeith, i) + '</small></li>');
                     }
+                    $('#gtbDepartShowAll').hide();
                 });
             });
 
